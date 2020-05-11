@@ -5,7 +5,7 @@ import { User } from './user.model';
 
 export class Custumer {
   constructor(
-    public name: string,
+    public name: string = "",
     public document: string,
     public email: string,
     public pets: Pet[],
