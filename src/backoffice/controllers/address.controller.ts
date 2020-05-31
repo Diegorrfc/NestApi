@@ -15,42 +15,37 @@ import { Result } from '../models/result.model';
 import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
  
 import { AddressContract } from '../contracts/address/address.contract';
-import { CreateAddressCommand } from '../commands/createCommands/createAddressComand';
+
 
 import { AddressEnum } from '../enums/AddressEnum';
 import { CreateAddressDto } from '../dtos/address/CreateAddressDto';
+import { CreateAddressCommand } from '../commands/addressCommands/AddressComand';
   
-  @Controller('v1/addresss')
-  export class CustomerController {
-    /**
-     *
-     */
+  @Controller('v1/address')
+  export class AddressController {
+   
     constructor(private addressCommand: CreateAddressCommand) {}
     
     @Post(':document/billing')
     @UseInterceptors(new ValidatorInterceptor(new AddressContract()))
-    async addBillingAddress(
-      @Param('document') document: string, @Body() addressDto: CreateAddressDto) {       
+    async addBillingAddress(@Param('document') document: string, @Body() addressDto: CreateAddressDto) {       
        
-        const result: Result = this.addressCommand.create(document,addressDto,AddressEnum.Billing);
-        
+        const result: Result = await this.addressCommand.create(document,addressDto,AddressEnum.Billing);        
         if(result.sucess)
           return result;
         
-        throw new HttpException(new Result("error", false, null, result.error), HttpStatus.BAD_REQUEST)       
+        throw new HttpException(result, HttpStatus.BAD_REQUEST)       
     }
     
     @Post(':document/shipping')
     @UseInterceptors(new ValidatorInterceptor(new AddressContract()))
-    async addShippingAddress(
-      @Param('document') document: string, @Body() addressDto: CreateAddressDto) {
+    async addShippingAddress(@Param('document') document: string, @Body() addressDto: CreateAddressDto) {
         
-        const result: Result = this.addressCommand.create(document,addressDto,AddressEnum.Shipping);
-        
+        const result: Result = await this.addressCommand.create(document,addressDto,AddressEnum.Shipping);       
         if(result.sucess)
           return result;
         
-        throw new HttpException(new Result("error", false, null, result.error), HttpStatus.BAD_REQUEST)
+        throw new HttpException(result, HttpStatus.BAD_REQUEST)
     }
   
   }

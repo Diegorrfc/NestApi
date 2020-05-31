@@ -14,4 +14,20 @@ export class AccountService {
     const user = new this.model(data);
     return await user.save();
   }
+
+  async checkExist(user: User): Promise<boolean> {    
+    console.log("checkExist")
+    var checkExist = await this.model.exists({ username:user.username });  
+    console.log(checkExist);
+    console.log("checkExist")
+    return checkExist; 
+  }
+
+  async delete(username: string): Promise<boolean> {    
+    console.log("resultDelete")
+    var resultDelete = await this.model.deleteOne({ username:username });  
+    console.log(resultDelete);
+    console.log("resultDelete")
+    return resultDelete; 
+  }
 }

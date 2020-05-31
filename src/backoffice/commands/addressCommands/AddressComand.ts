@@ -3,18 +3,14 @@ import { AddressService } from "src/backoffice/service/address.service";
 import { Address } from "src/backoffice/models/address.model";
 import { AddressEnum } from "src/backoffice/enums/AddressEnum";
 import { Result } from "src/backoffice/models/result.model";
-import { Custumer } from "src/backoffice/models/custumer.model";
 import { CreateAddressDto } from "src/backoffice/dtos/address/CreateAddressDto";
 
 @Injectable()
 export class CreateAddressCommand{
-
-    /**
-     *
-     */
+    
     constructor(private addressService: AddressService) { }
-
-    create(document: string, addressDto: CreateAddressDto, addressEnum: AddressEnum ): Result{
+   
+    async create(document: string, addressDto: CreateAddressDto, addressEnum: AddressEnum ): Promise<Result>{
 
         const address =  new Address(
             addressDto.zipCode,
@@ -25,22 +21,23 @@ export class CreateAddressCommand{
             addressDto.city,
             addressDto.state,
             addressDto.country
-            );
-        
-        let custumer;
-        try {
+            );        
+        let custumer;   
+       
+        if(!(await this.addressService.checkExist(document)))           
+            return new Result("Erro ao criar o endereço", false, null, "usuário não existe")          
 
+        try {           
+           
             if(addressEnum == AddressEnum.Billing)
                 custumer = this.addressService.createBillingAddress(document, address);
             else
                 custumer = this.addressService.createShippingAddress(document, address);
             
-        } catch (error) {
-            return new Result("Erro ao criar o endereço", true, null, null)
-        }
-        return new Result("Endereço criado", true, custumer, null)        
-        
-       
-    }
+           return new Result("Endereço criado", true, custumer, null)
 
+        } catch (error) {
+            return new Result("Erro ao criar o endereço", false, null, null)
+        }       
+    }
 }

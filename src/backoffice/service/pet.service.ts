@@ -26,6 +26,8 @@ export class PetService {
     console.log(custumer)
     return custumer;
   }
-
- 
+  async checkExist(document: string, data: Pet): Promise<Custumer>{
+    var checkExist = await this.custumer.exists({ document });    
+    return checkExist; 
+  } 
 }

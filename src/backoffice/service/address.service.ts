@@ -30,7 +30,14 @@ export class AddressService {
       { $set: { shippingAddress: data } },
       { upsert: true , new: true, projection: { _id: 0 } , select:'shippingAddress name document'},
     );  
-    console.log(custumer)
-   return custumer;        
-  } 
+    //console.log(custumer)
+    return custumer;        
+  }
+  async checkExist(document: string): Promise<boolean> {    
+    console.log("aquiiiiiiiiiiiii")
+    var t= await this.custumer.exists({ document });  
+    console.log(t);
+    console.log("aquiiiiiiiiiiiii")
+    return t; 
+  }
 }

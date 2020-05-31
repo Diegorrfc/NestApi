@@ -7,7 +7,11 @@ import { AccountService } from './service/account.service';
 import { CustumerService } from './service/custumer.servive';
 import { AddressService } from './service/address.service';
 import { PetService } from './service/pet.service';
-import { CreateAddressCommand } from './commands/createCommands/createAddressComand';
+import { CreateAddressCommand } from './commands/addressCommands/AddressComand';
+import { AddressController } from './controllers/address.controller';
+import { CustumerCommand } from './commands/customerCommands/custumerCommand';
+import { PetCommand } from './commands/PetCommand/PetCommand';
+import { AccountController } from './controllers/account.controller';
 
 @Module({
   imports: [
@@ -16,7 +20,7 @@ import { CreateAddressCommand } from './commands/createCommands/createAddressCom
       { name: 'User', schema: UserSchema },
     ]),
   ],
-  controllers: [CustomerController],
-  providers: [AccountService, CustumerService,PetService,AddressService,CreateAddressCommand],
+  controllers: [CustomerController,AddressController, AccountController],
+  providers: [AccountService, CustumerService,PetService,AddressService,CreateAddressCommand,CustumerCommand,PetCommand],
 })
 export class BackofficeModule {}
