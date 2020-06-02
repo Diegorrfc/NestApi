@@ -48,5 +48,9 @@ export class CustomerController {
   async getAllCustumers(){
     return await this.custumerService.getAll()   
   }
+  @Get()
+  async getAllCustumersTeste(){
+    return await this.custumerService.getAll()   
+  }
   
 }
