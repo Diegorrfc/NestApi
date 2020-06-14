@@ -1,9 +1,9 @@
-import { Result } from "src/backoffice/models/result.model";
+import { Result } from "src/modules/backoffice/models/result.model";
 import { Injectable } from "@nestjs/common";
-import { PetService } from "src/backoffice/service/pet.service";
-import { CreatePetDto } from "src/backoffice/dtos/pet/createPetDto";
-import { Pet } from "src/backoffice/models/pet.model";
-import { CustumerService } from "src/backoffice/service/custumer.servive";
+import { PetService } from "src/modules/backoffice/service/pet.service";
+import { CreatePetDto } from "src/modules/backoffice/dtos/pet/createPetDto";
+import { Pet } from "src/modules/backoffice/models/pet.model";
+import { CustumerService } from "src/modules/backoffice/service/custumer.servive";
 
 
 

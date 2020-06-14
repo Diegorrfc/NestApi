@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import { AddressService } from "src/backoffice/service/address.service";
-import { Address } from "src/backoffice/models/address.model";
-import { AddressEnum } from "src/backoffice/enums/AddressEnum";
-import { Result } from "src/backoffice/models/result.model";
-import { CreateAddressDto } from "src/backoffice/dtos/address/CreateAddressDto";
+import { AddressService } from "src/modules/backoffice/service/address.service";
+import { Address } from "src/modules/backoffice/models/address.model";
+import { AddressEnum } from "src/modules/backoffice/enums/AddressEnum";
+import { Result } from "src/modules/backoffice/models/result.model";
+import { CreateAddressDto } from "src/modules/backoffice/dtos/address/CreateAddressDto";
 
 @Injectable()
 export class CreateAddressCommand{

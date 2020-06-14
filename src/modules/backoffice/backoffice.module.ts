@@ -21,7 +21,7 @@ import { PetController } from './controllers/pet.controller';
       { name: 'User', schema: UserSchema },
     ]),
   ],
-  controllers: [CustomerController,AddressController, AccountController, PetController],
-  providers: [AccountService, CustumerService,PetService,AddressService,CreateAddressCommand,CustumerCommand,PetCommand],
+  controllers: [CustomerController, AddressController, AccountController, PetController],
+  providers: [AccountService, CustumerService, PetService, AddressService, CreateAddressCommand, CustumerCommand, PetCommand],
 })
 export class BackofficeModule {}

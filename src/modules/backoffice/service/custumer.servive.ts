@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Custumer } from '../models/custumer.model';
 import { User } from '../models/user.model';
+import { QueryDTo } from '../dtos/query/QueryDto';
 
 @Injectable()
 export class CustumerService {
@@ -40,5 +41,9 @@ export class CustumerService {
       result = false;
     }
     return result 
-  }  
+  }
+
+  async query(model: QueryDTo): Promise<Custumer[]>{
+    return await this.custumer.find(model.query, model.field, {skip: model.skip, limit: model.take}).sort(model.sort).exec();
+  }
 }

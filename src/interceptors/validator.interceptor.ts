@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Contract } from 'src/contract/contracts';
-import { Result } from 'src/backoffice/models/result.model';
+import { Result } from 'src/modules/backoffice/models/result.model';
 
 
 @Injectable()

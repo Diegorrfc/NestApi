@@ -16,6 +16,8 @@ import { CustumerContract } from '../contracts/customer/custumer.contract';
 import { CreateCustumerDto } from '../dtos/custumer/createCustumerDto';
 import { CustumerService } from '../service/custumer.servive';
 import { CustumerCommand } from '../commands/customerCommands/custumerCommand';
+import { QueryDTo } from '../dtos/query/QueryDto';
+import { QueryContract } from '../contracts/query/QueryContract';
 
 @Controller('v1/custumers')
 export class CustomerController {
@@ -47,5 +49,12 @@ export class CustomerController {
   @Get()
   async getAllCustumers(){
     return await this.custumerService.getAll()   
-  }  
+  }
+
+  @Post('query')
+  @UseInterceptors(new ValidatorInterceptor(new QueryContract()))
+  async getQUery(@Body() model: QueryDTo)
+  {
+    return await this.custumerService.query(model);
+  }
 }
