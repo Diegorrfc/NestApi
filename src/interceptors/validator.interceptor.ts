@@ -24,7 +24,7 @@ export class ValidatorInterceptor implements NestInterceptor {
 
     if (!validate) {
       throw new HttpException(
-        new Result('Deu arrado', false, null, this.contract.erros),
+        new Result('Aconteceu algo inesperado', false, null, this.contract.erros),
         HttpStatus.BAD_REQUEST,
       );
     }

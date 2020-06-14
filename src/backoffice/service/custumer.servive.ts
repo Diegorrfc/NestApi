@@ -31,5 +31,14 @@ export class CustumerService {
       { document },
       { $set: { name: user.username } },
       { upsert: true }).exec()
-  } 
+  }
+  async checkExist(id: string): Promise<boolean>{
+   var result: boolean;
+    try {
+      result = await this.custumer.exists({ _id:id }); 
+    } catch (error) {
+      result = false;
+    }
+    return result 
+  }  
 }

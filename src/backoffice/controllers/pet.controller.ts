@@ -11,41 +11,43 @@ import {
     HttpStatus,
   } from '@nestjs/common';
   
-  import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
-  import { CustumerContract } from '../contracts/customer/custumer.contract';
-  import { CreateCustumerDto } from '../dtos/custumer/createCustumerDto';
-  import { CustumerService } from '../service/custumer.servive';
-  import { CustumerCommand } from '../commands/customerCommands/custumerCommand';
+import { ValidatorInterceptor } from 'src/interceptors/validator.interceptor';
+import { CustumerService } from '../service/custumer.servive'; 
+import { PetCommand } from '../commands/PetCommand/PetCommand';
+import { CreatePetDto } from '../dtos/pet/createPetDto';
+import { PetContract } from '../contracts/pet/PetContract';
+import { PetService } from '../service/pet.service';
   
   @Controller('v1/pet')
-  export class CustomerController {
+  export class PetController {
     /**
      *
      */
-    constructor(
-      private custumerCommand: CustumerCommand,
-      private custumerService: CustumerService
+    constructor(    
+      private petService: PetService,
+      private petCommand: PetCommand,
     ) {}
   
-    @Get(':document')
-    async get(@Param('document') document) {
-      return 'obter os cliente' + document;
-    }
-   
-    @Post()
-    @UseInterceptors(new ValidatorInterceptor(new CustumerContract()))
-    async post(@Body() model: CreateCustumerDto) {   
+    @Post(':id')
+    @UseInterceptors(new ValidatorInterceptor(new PetContract()))
+    async post(@Param('id') document: string, @Body() model: CreatePetDto) {   
     
-      let result = await this.custumerCommand.create(model)
-     
+      let result = await this.petCommand.create(document,model)     
       if(result.sucess)
         return result
       else
         return new HttpException(result, HttpStatus.BAD_REQUEST);    
     }
   
-    @Get()
-    async getAllCustumers(){
-      return await this.custumerService.getAll()   
+    @Get(':id')
+    async getPets(@Param('id') idCustumer: string){
+      return await this.petCommand.getAllPet(idCustumer)   
+    }
+
+
+    @Delete(':idCustumer/:idPet')
+    async delete(@Param('idCustumer') idCustumer: string, @Param('idPet') idPet ){
+      console.log(idCustumer,idPet)
+      this.petService.delete(idCustumer,idPet)
     }
   }

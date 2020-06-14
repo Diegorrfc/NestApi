@@ -32,6 +32,20 @@ export class CustumerCommand {
         }       
     }
 
+    async get(id: string) : Promise<Result> {
+      
+      let result: Result;
+
+       try {
+        var resultService = await this.custumerService.get(id)
+        result = new Result("", true, resultService, null);
+       } 
+       catch (error) {       
+        result = new Result(`Não existe nenhum custumer com o id ${id}`, true, resultService, null);
+       }
+       return result;
+    }
+    
     async update(createCustumerDto: CreateCustumerDto): Promise<Result>{
 
         let user = new User(createCustumerDto.name, createCustumerDto.password, true)       

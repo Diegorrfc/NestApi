@@ -41,7 +41,7 @@ export class CustomerController {
   @Get(':document')
   async get(@Param('document') document) {
     console.log(document)
-    return await this.custumerService.get(document);
+    return await this.custumerCommand.get(document);
   }  
 
   @Get()
