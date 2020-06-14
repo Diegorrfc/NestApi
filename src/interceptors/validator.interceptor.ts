@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Contract } from 'src/contract/contracts';
-import { Result } from 'src/backoffice/models/result.model';
+import { Result } from 'src/modules/backoffice/models/result.model';
 
 
 @Injectable()
@@ -24,7 +24,7 @@ export class ValidatorInterceptor implements NestInterceptor {
 
     if (!validate) {
       throw new HttpException(
-        new Result('Deu arrado', false, null, this.contract.erros),
+        new Result('Aconteceu algo inesperado', false, null, this.contract.erros),
         HttpStatus.BAD_REQUEST,
       );
     }

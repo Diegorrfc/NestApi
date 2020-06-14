@@ -19,8 +19,7 @@ import {
     /**
      *
      */
-    constructor(
-      private custumerCommand: CustumerCommand,
+    constructor(      
       private accountService: AccountService
     ) {}
   

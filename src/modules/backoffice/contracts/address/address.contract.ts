@@ -1,6 +1,6 @@
-import { Contract } from '../../../contract/contracts';
+import { Contract } from '../../../../contract/contracts';
 import { Flunt } from 'src/utils/flunt/flunt';
-import { CreateAddressDto } from 'src/backoffice/dtos/address/CreateAddressDto';
+import { CreateAddressDto } from 'src/modules/backoffice/dtos/address/CreateAddressDto';
 
 export class AddressContract implements Contract {
   erros: any[];

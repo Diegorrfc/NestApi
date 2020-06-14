@@ -1,10 +1,10 @@
-import { Result } from "src/backoffice/models/result.model";
+import { Result } from "src/modules/backoffice/models/result.model";
 import { Injectable } from "@nestjs/common";
-import { CustumerService } from "src/backoffice/service/custumer.servive";
-import { CreateCustumerDto } from "src/backoffice/dtos/custumer/createCustumerDto";
-import { User } from "src/backoffice/models/user.model";
-import { Custumer } from "src/backoffice/models/custumer.model";
-import { AccountService } from "src/backoffice/service/account.service";
+import { CustumerService } from "src/modules/backoffice/service/custumer.servive";
+import { CreateCustumerDto } from "src/modules/backoffice/dtos/custumer/createCustumerDto";
+import { User } from "src/modules/backoffice/models/user.model";
+import { Custumer } from "src/modules/backoffice/models/custumer.model";
+import { AccountService } from "src/modules/backoffice/service/account.service";
 
 
 @Injectable()
@@ -32,6 +32,20 @@ export class CustumerCommand {
         }       
     }
 
+    async get(id: string) : Promise<Result> {
+      
+      let result: Result;
+
+       try {
+        var resultService = await this.custumerService.get(id)
+        result = new Result("", true, resultService, null);
+       } 
+       catch (error) {       
+        result = new Result(`Não existe nenhum custumer com o id ${id}`, true, resultService, null);
+       }
+       return result;
+    }
+    
     async update(createCustumerDto: CreateCustumerDto): Promise<Result>{
 
         let user = new User(createCustumerDto.name, createCustumerDto.password, true)       
